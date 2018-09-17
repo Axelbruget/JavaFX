@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
+    <top>
+        <Label alignment="CENTER" text="DICE GAME" BorderPane.alignment="CENTER" />
+    </top>
+    <left>
+        <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Joueur 1 :"/>
+            <TextArea maxWidth="10"/>
+            <Label text="Total :"/>
+            <Label text="Current :"/>
+         </children></VBox>
+    </left>
+    <center>
+        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="roll" onAction="#test" text="Roll"/>
+                <Label fx:id="result"/>
+                <Button fx:id="hold" text="Hold"/>
+            </children>
+        </VBox>
+    </center>
+    <right>
+        <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Joueur 2 :"/>
+            <TextArea/>
+            <Label text="Total :"/>
+            <Label text="Current :"/>
+         </children></VBox>
+    </right>
+    <bottom>
+        <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="new" text="New Game"/>
+                <Button fx:id="quit" text="Quit"/>
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>
