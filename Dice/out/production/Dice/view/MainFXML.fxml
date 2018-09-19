@@ -2,48 +2,51 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
-    <top>
-        <Label alignment="CENTER" text="DICE GAME" BorderPane.alignment="CENTER" />
-    </top>
+
     <left>
-        <VBox BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Joueur 1 :"/>
-            <TextArea maxWidth="10"/>
-            <Label text="Total :"/>
-            <Label text="Current :"/>
-         </children></VBox>
+        <BorderPane BorderPane.alignment="CENTER">
+            <left><Label fx:id="totalPlayerOne" text="Total :" BorderPane.alignment="CENTER" />
+            </left>
+         <center><Label fx:id="currentPlayerOne" text="Current :" BorderPane.alignment="CENTER" />
+         </center>
+         <top>
+            <Label text="Joueur 1 :" BorderPane.alignment="CENTER" />
+         </top>
+        </BorderPane>
     </left>
     <center>
-        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="roll" onAction="#test" text="Roll"/>
-                <Label fx:id="result"/>
-                <Button fx:id="hold" text="Hold"/>
-            </children>
-        </VBox>
+        <BorderPane BorderPane.alignment="CENTER">
+            <center><Label fx:id="result" /></center>
+            <top><Button fx:id="roll" onAction="#rollDice" text="Roll" BorderPane.alignment="CENTER" />
+            </top>
+            <bottom><Button fx:id="hold" onAction="#hold" text="Hold" BorderPane.alignment="CENTER" />
+            </bottom>
+        </BorderPane>
     </center>
-    <right>
-        <VBox BorderPane.alignment="CENTER">
+   <right>
+       <BorderPane BorderPane.alignment="CENTER">
+           <left><Label fx:id="totalPlayerTwo" text="Total :" BorderPane.alignment="CENTER" />
+           </left>
+           <center><Label fx:id="currentPlayerTwo" text="Current :" BorderPane.alignment="CENTER" />
+           </center>
+         <top>
+            <Label text="Joueur 2 :" BorderPane.alignment="CENTER" />
+         </top>
+       </BorderPane>
+   </right>
+   <bottom>
+      <HBox prefHeight="202.0" prefWidth="898.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Joueur 2 :"/>
-            <TextArea/>
-            <Label text="Total :"/>
-            <Label text="Current :"/>
-         </children></VBox>
-    </right>
-    <bottom>
-        <HBox alignment="CENTER" BorderPane.alignment="CENTER">
-            <children>
-                <Button fx:id="new" text="New Game"/>
-                <Button fx:id="quit" text="Quit"/>
-            </children>
-        </HBox>
-    </bottom>
+                <Button fx:id="new" text="New Game" />
+                <Button fx:id="quit" text="Quit" />
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <Label fx:id="currentPlayerPlaying" BorderPane.alignment="CENTER" />
+   </top>
 </BorderPane>
