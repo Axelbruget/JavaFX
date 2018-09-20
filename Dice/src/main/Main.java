@@ -24,8 +24,12 @@ public class Main extends Application {
         Boolean running = true;
         PlayerManager manager = new PlayerManager(new Player(), new Player());
 
-        while ( running = true ){
+        while ( running == true ){
 
+            if (manager.getPlayerOne().getTotalScore() == 100 || manager.getPlayerTwo().getTotalScore() == 100){
+                running = false;
+            }
         }
+
     }
 }

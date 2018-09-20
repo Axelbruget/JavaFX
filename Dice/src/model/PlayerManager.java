@@ -8,10 +8,12 @@ public class PlayerManager {
     private Player playerOne;
     private Player playerTwo;
 
+    public void setPlayerOne(Player playerOne) { this.playerOne = playerOne; }
+    public void setPlayerTwo(Player playerTwo) { this.playerTwo = playerTwo; }
+
     public Player getPlayerOne() {
         return playerOne;
     }
-
     public Player getPlayerTwo() {
         return playerTwo;
     }
@@ -23,8 +25,8 @@ public class PlayerManager {
 
 
     public PlayerManager(Player playerOne, Player playerTwo) {
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
+        setPlayerOne(playerOne);
+        setPlayerTwo(playerTwo);
         setCurrentPlayerPlaying(1);
     }
 

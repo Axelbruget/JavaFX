@@ -53,13 +53,20 @@ public class MainView{
 
     @FXML
     public void hold(){
+        playerManager.getPlayer().setTotalScore(playerManager.getPlayer().getTotalScore() + playerManager.getPlayer().getCurrentScore());
+        playerManager.getPlayer().setCurrentScore(0);
         playerManager.nextPlayer();
     }
 
     @FXML
     public void rollDice(){
         generator.generate();
-        playerManager.getPlayer().setCurrentScore(generator.getRandomNumber());
+        playerManager.getPlayer().setCurrentScore(playerManager.getPlayer().getCurrentScore() + generator.getRandomNumber());
+    }
+
+    @FXML
+    public void quit(){
+        result.getScene().getWindow().hide();
     }
 
 }
