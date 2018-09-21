@@ -3,12 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
 
     <left>
-        <BorderPane BorderPane.alignment="CENTER">
+        <BorderPane fx:id="borderPanePlayer1" BorderPane.alignment="CENTER">
             <left><Label fx:id="totalPlayerOne" text="Total :" BorderPane.alignment="CENTER" />
             </left>
          <center><Label fx:id="currentPlayerOne" text="Current :" BorderPane.alignment="CENTER" />
@@ -28,7 +27,7 @@
         </BorderPane>
     </center>
    <right>
-       <BorderPane BorderPane.alignment="CENTER">
+       <BorderPane fx:id="borderPanePlayer2" BorderPane.alignment="CENTER">
            <left><Label fx:id="totalPlayerTwo" text="Total :" BorderPane.alignment="CENTER" />
            </left>
            <center><Label fx:id="currentPlayerTwo" text="Current :" BorderPane.alignment="CENTER" />
@@ -39,12 +38,14 @@
        </BorderPane>
    </right>
    <bottom>
-      <HBox prefHeight="202.0" prefWidth="898.0" BorderPane.alignment="CENTER">
-         <children>
-                <Button onAction="#newGame" fx:id="new" text="New Game" />
-                <Button onAction="#quit" fx:id="quit" text="Quit" />
-         </children>
-      </HBox>
+        <BorderPane>
+            <left>
+                <Button fx:id="new" onAction="#newGame" text="New Game" />
+            </left>
+            <right>
+                <Button fx:id="quit" onAction="#quit" text="Quit" />
+            </right>
+        </BorderPane>
    </bottom>
    <top>
       <Label fx:id="currentPlayerPlaying" BorderPane.alignment="CENTER" />

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
+   <top>
+      <ListView fx:id="listeVue" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <Button onAction="#addPersonne" fx:id="addButton" mnemonicParsing="false" text="Add" BorderPane.alignment="CENTER" />
+   </center>
+
+    <bottom>
+        <Button onAction="#deletePersonne" fx:id="deleteButton" mnemonicParsing="false" text="Remove" BorderPane.alignment="CENTER" />
+    </bottom>
+</BorderPane>
