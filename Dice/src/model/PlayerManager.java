@@ -3,6 +3,9 @@ package model;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PlayerManager {
 
     private Player playerOne;
@@ -42,5 +45,20 @@ public class PlayerManager {
             return playerOne;
         }
         else return playerTwo;
+    }
+    public List<Player> getPlayers(){
+        List<Player> list = new ArrayList<>();
+        list.add(playerOne);
+        list.add(playerTwo);
+
+        return list;
+
+    }
+
+    public void resetScore(List<Player> list){
+        for ( Player p : list ){
+            p.setTotalScore(0);
+            p.setCurrentScore(0);
+        }
     }
 }

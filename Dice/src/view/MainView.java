@@ -69,4 +69,9 @@ public class MainView{
         result.getScene().getWindow().hide();
     }
 
+    @FXML
+    public void newGame(){
+        playerManager.resetScore(playerManager.getPlayers());
+    }
+
 }

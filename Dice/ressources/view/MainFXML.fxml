@@ -41,7 +41,7 @@
    <bottom>
       <HBox prefHeight="202.0" prefWidth="898.0" BorderPane.alignment="CENTER">
          <children>
-                <Button fx:id="new" text="New Game" />
+                <Button onAction="#newGame" fx:id="new" text="New Game" />
                 <Button onAction="#quit" fx:id="quit" text="Quit" />
          </children>
       </HBox>
