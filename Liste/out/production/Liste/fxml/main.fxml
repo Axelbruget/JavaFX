@@ -6,19 +6,29 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 
+<?import java.lang.Integer?>
+<?import javafx.scene.control.Label?>
 <BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
-    <top>
-        <TextField fx:id="affichageLabel" />
-    </top>
-   <center>
+   <fx:define>
+        <Integer fx:value ="-1" fx:id="nonSelectedValue"/>
+   </fx:define>
+
+   <left>
       <ListView fx:id="listeVue" BorderPane.alignment="CENTER" />
-   </center>
+   </left>
    <bottom>
        <ToolBar BorderPane.alignment="CENTER">
-           <Button mnemonicParsing="false" onAction="#add" text="Add" />
-           <Button fx:id="eventButton" text="Clean" />
+           <Button mnemonicParsing="false" defaultButton="true" disable="${personneNameToolBar.text.empty}" onAction="#add" text="Add" />
+           <Button fx:id="eventButton" text="Clean" disable="${personneNameToolBar.text.empty}"/>
            <TextField fx:id="personneNameToolBar" />
-           <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#delete" text="Remove" />
+           <Button fx:id="deleteButton" mnemonicParsing="false" disable="${listeVue.selectionModel.selectedIndex == nonSelectedValue}" onAction="#delete" text="Remove" />
        </ToolBar>
    </bottom>
+   <right>
+      <BorderPane BorderPane.alignment="CENTER">
+         <center>
+              <Label fx:id="affichageLabel"/>
+         </center>
+      </BorderPane>
+   </right>
 </BorderPane>

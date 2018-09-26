@@ -34,13 +34,4 @@ public class Personne {
         setNom(nom);
     }
 
-
-    /**
-     * Redéfinition de la méthode toString qui renvoit de base le nom de l'objet et son addresse
-     * @return Retourne le nom suivie de l'age de la Personne
-     */
-    @Override
-    public String toString(){
-        return getNom() + " " + getAge();
-    }
 }

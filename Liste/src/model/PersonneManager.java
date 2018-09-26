@@ -29,32 +29,22 @@ public class PersonneManager {
      * Constructeur qui permet d'avoir un élément dans la liste lorsqu'on instancie un objet PersonneManager
      */
     public PersonneManager() {
-        listobservable.add(new Personne("Axel",15));
+        listobservable.add(new Personne("Axel",21));
     }
 
     /**
      * Ajoute une Personne à la liste avec un nom donné et un age random
-     * Catch une exception lorsque le nom saisi est null ou vide
      * @param nomPersonne Le nom de la personne à ajouter
      */
     public void addPersonne(String nomPersonne){
-        try {
-            getList().add(new Personne(nomPersonne, (int) (Math.random() * 150)));
-        }catch (IllegalArgumentException e){
-            System.err.println("Nom Incorrect");
-        }
+        getList().add(new Personne(nomPersonne, (int) (Math.random() * 150)));
     }
 
     /**
      * Permet de supprimer une Personne de la liste
-     * Catch une exception lorsque l'on a saisi aucune Personne de la liste
      * @param index L'index dans la liste de la personne que l'on veut supprimer
      */
     public void deletePersonne(int index){
-        try {
             getList().remove(index);
-        }catch (IndexOutOfBoundsException e){
-            System.err.println("Veuillez cliquer sur l'element à supprimer");
-        }
     }
 }

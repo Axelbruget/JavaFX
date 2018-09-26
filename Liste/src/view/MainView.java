@@ -1,20 +1,9 @@
 package view;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
+import javafx.scene.control.*;
 import model.Personne;
 import model.PersonneManager;
-
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 
 
 /**
@@ -47,20 +36,15 @@ public class MainView {
     private TextField personneNameToolBar;
 
     /**
-     * Second TextField qui permet également de saisir le nom d'une personne
+     * Label qui affiche la Personne sélectionnée
      */
     @FXML
-    private TextField affichageLabel;
+    private Label affichageLabel;
 
     /**
      * Attribut PersonneManager qui permet de gérer la liste de personne
      */
     private PersonneManager manager = new PersonneManager();
-
-    /**
-     * Booleen qui retourne vrai lorsque la liste est vide, faux sinon
-     */
-    private BooleanProperty emptylist = new SimpleBooleanProperty();
 
     /**
      * Appelee juste avant le chargement du fichier FXML
@@ -70,12 +54,18 @@ public class MainView {
 
         listeVue.itemsProperty().bind(manager.listProperty());
 
-        emptylist.bind(manager.listProperty().emptyProperty());
-        deleteButton.disableProperty().bind(emptylist);
+        listeVue.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                affichageLabel.textProperty().bind(newValue.nomProperty().concat(" - ").concat(newValue.ageProperty()));
+            }
+            if (oldValue != null){
+                affichageLabel.textProperty().unbindBidirectional(oldValue.nomProperty());
+            }
+        });
 
-        affichageLabel.textProperty().bindBidirectional(personneNameToolBar.textProperty());
+        eventButton.setOnAction(event -> personneNameToolBar.setText(""));
 
-        eventButton.setOnAction(event -> affichageLabel.setText(null));
+        listeVue.setCellFactory(param -> new MaListCell());
 
     }
 
@@ -84,6 +74,7 @@ public class MainView {
      */
     public void add(){
         manager.addPersonne(personneNameToolBar.getText());
+        personneNameToolBar.setText("");
     }
     /**
      * Permet de supprimer une personne de la liste au clic du boutton Remove
