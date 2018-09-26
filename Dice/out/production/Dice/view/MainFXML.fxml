@@ -38,7 +38,7 @@
        </BorderPane>
    </right>
    <bottom>
-        <BorderPane prefHeight="219.0" prefWidth="1182.0">
+        <BorderPane>
             <left>
                 <Button fx:id="new" onAction="#newGame" text="New Game" />
             </left>

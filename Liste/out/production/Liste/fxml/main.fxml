@@ -2,17 +2,23 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
-   <top>
-      <ListView fx:id="listeVue" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </top>
+    <top>
+        <TextField fx:id="affichageLabel" />
+    </top>
    <center>
-      <Button onAction="#addPersonne" fx:id="addButton" mnemonicParsing="false" text="Add" BorderPane.alignment="CENTER" />
+      <ListView fx:id="listeVue" BorderPane.alignment="CENTER" />
    </center>
-
-    <bottom>
-        <Button onAction="#deletePersonne" fx:id="deleteButton" mnemonicParsing="false" text="Remove" BorderPane.alignment="CENTER" />
-    </bottom>
+   <bottom>
+       <ToolBar BorderPane.alignment="CENTER">
+           <Button mnemonicParsing="false" onAction="#add" text="Add" />
+           <Button fx:id="eventButton" text="Clean" />
+           <TextField fx:id="personneNameToolBar" />
+           <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#delete" text="Remove" />
+       </ToolBar>
+   </bottom>
 </BorderPane>
