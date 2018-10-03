@@ -1,21 +1,15 @@
 package view;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import model.Chambre;
-import model.CollectionChambre;
-import model.Patient;
+import javafx.scene.control.*;
 import vm.ChambreVM;
 import vm.CollectionChambreVM;
 import vm.PatientVM;
 
 public class mainView {
 
-    @FXML private ListView<Chambre> listeChambres;
-    @FXML private ListView<Patient> listePatients;
+    @FXML private ListView<ChambreVM> listeChambres;
+    @FXML private ListView<PatientVM> listePatients;
     @FXML private Label labelNomPatient;
     @FXML private TextField textFieldNomPatient;
     @FXML private Button clicValider;
@@ -30,10 +24,25 @@ public class mainView {
         labelNomPatient.textProperty().bind(patientVM.nomPropertyProperty());
         textFieldNomPatient.textProperty().bindBidirectional(patientVM.nomPropertyProperty());
 
+        listeChambres.itemsProperty().bind(collectionChambreVM.listProperty());
 
+        listeChambres.setCellFactory(__ -> new ListCell<ChambreVM>(){
+            @Override
+            protected void updateItem(ChambreVM item, boolean empty) {
+                super.updateItem(item, empty);
+                if (!empty){
+                    textProperty().bind(item.numeroProperty().asString());
+                }
+                else{
+                    textProperty().unbind();
+                    setText("");
+                }
+
+            }
+        });
     }
 
     public void clicBoutton(){
-
+        collectionChambreVM.addChambreVM(new ChambreVM());
     }
 }
