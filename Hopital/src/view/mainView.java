@@ -15,7 +15,6 @@ public class mainView {
     @FXML private Button clicValider;
 
     private PatientVM patientVM = new PatientVM();
-    private ChambreVM chambreVM = new ChambreVM();
     private CollectionChambreVM collectionChambreVM = new CollectionChambreVM();
 
 
@@ -31,7 +30,7 @@ public class mainView {
             protected void updateItem(ChambreVM item, boolean empty) {
                 super.updateItem(item, empty);
                 if (!empty){
-                    textProperty().bind(item.numeroProperty().asString());
+                    textProperty().bind(item.getNumeroProperty().asString());
                 }
                 else{
                     textProperty().unbind();

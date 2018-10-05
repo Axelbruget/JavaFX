@@ -5,11 +5,13 @@ import javafx.beans.property.ReadOnlyListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Chambre;
 import model.CollectionChambre;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CollectionChambreVM implements PropertyChangeListener {
 
@@ -24,8 +26,10 @@ public class CollectionChambreVM implements PropertyChangeListener {
     public CollectionChambreVM() {
         model = new CollectionChambre(new ArrayList<>());
         model.addPropertyChangeListener(this);
-        //listObs.setAll(model.getListChambre());
-        //listObs.addListener((obs,oldV,newV) -> model.setListChambre(newV));
+        List<Chambre> list = model.getListChambre();
+        //listObs.setAll((List<ChambreVM>) list);
+        //list.addListener((obs,oldV,newV) -> model.setListChambre(newV));
+
     }
 
     @Override

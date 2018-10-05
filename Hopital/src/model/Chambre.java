@@ -25,6 +25,8 @@ public class Chambre {
         this.patient = newPatient;
 
     }
+    public int getNumero() { return numero; }
+    public Patient getPatient() { return patient; }
 
     public Chambre(int numero, Patient patient) {
         this.numero = numero;
