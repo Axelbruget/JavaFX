@@ -17,10 +17,6 @@ public class Patient {
         this.nom = newNom;
     }
 
-    public Patient(String nom) {
-        this.nom = nom;
-    }
-
     public void addPropertyChangeListener(PropertyChangeListener listener){
         propertyChangePatient.addPropertyChangeListener(listener);
     }

@@ -24,8 +24,9 @@ public class CollectionChambreVM implements PropertyChangeListener {
 
 
     public CollectionChambreVM() {
-        model = new CollectionChambre(new ArrayList<>());
+        model = new CollectionChambre();
         model.addPropertyChangeListener(this);
+
         List<Chambre> list = model.getListChambre();
         //listObs.setAll((List<ChambreVM>) list);
         //list.addListener((obs,oldV,newV) -> model.setListChambre(newV));
@@ -35,7 +36,7 @@ public class CollectionChambreVM implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals(CollectionChambre.PROP_LIST)){
-            listObs.add((ChambreVM) evt.getNewValue());
+            //listObs.add((ChambreVM) evt.getNewValue());
         }
     }
 

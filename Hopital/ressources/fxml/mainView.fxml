@@ -5,19 +5,22 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.mainView">
    <left>
       <BorderPane BorderPane.alignment="CENTER">
          <top>
-              <Label fx:id="labelNomPatient" BorderPane.alignment="CENTER" />
+            <HBox BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="textFieldNomPatient" promptText="Nom du patient" />
+                  <Button fx:id="clicValider" mnemonicParsing="false" onAction="#clicAjouterPatient" text="Valider" disable="${textFieldNomPatient.text.empty}"/>
+               </children>
+            </HBox>
          </top>
-         <center>
-            <TextField fx:id="textFieldNomPatient" promptText="Nom du patient" BorderPane.alignment="CENTER" />
-         </center>
-         <bottom>
-            <Button fx:id="clicValider" mnemonicParsing="false" onAction="#clicBoutton" text="Valider" BorderPane.alignment="CENTER" />
-         </bottom>
+          <bottom>
+              <Button fx:id="clicAjouterChambre" mnemonicParsing="false" onAction="#clicAjouterChambre" text="Ajouter une chambre"/>
+          </bottom>
       </BorderPane>
    </left>
    <right>
@@ -25,7 +28,7 @@
          <bottom>
             <BorderPane BorderPane.alignment="CENTER">
                 <top>
-                    <Label text="La liste des chambres"/>
+                    <Label text="La liste des chambres" />
                 </top>
                 <center>
                     <ListView fx:id="listeChambres" BorderPane.alignment="CENTER" />
@@ -35,7 +38,7 @@
          <top>
             <BorderPane BorderPane.alignment="CENTER">
                 <top>
-                    <Label text="Les patients de cette chambre"/>
+                    <Label text="Les patients de cette chambre" />
                 </top>
                 <center>
                     <ListView fx:id="listePatients" BorderPane.alignment="CENTER" />

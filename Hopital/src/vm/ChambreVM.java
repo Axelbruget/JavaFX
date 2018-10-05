@@ -1,11 +1,9 @@
 package vm;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.Chambre;
-import model.Patient;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -19,20 +17,22 @@ public class ChambreVM implements PropertyChangeListener {
         public IntegerProperty getNumeroProperty() { return numeroProperty; }
         public void setNumero(int numero) { this.numeroProperty.set(numero); }
 
-    private ObjectProperty<Patient> patientProperty = new SimpleObjectProperty<Patient>();
-        public Object getPatient() { return patientProperty.get(); }
-        public ObjectProperty getPatientProperty() { return patientProperty; }
-        public void setPatient(Patient patient) { this.patientProperty.set(patient); }
+
+    private ObservableList<PatientVM> listObs = FXCollections.observableArrayList();
+        private ListProperty<PatientVM> list = new SimpleListProperty<>(listObs);
+        public ObservableList<PatientVM> getList() { return FXCollections.unmodifiableObservableList(list.get()); }
+        public ReadOnlyListProperty<PatientVM> listProperty() { return list; }
 
 
     public ChambreVM() {
-        model = new Chambre(1, new Patient("toto"));
+        model = new Chambre();
         model.addPropertyChangeListener(this);
-        patientProperty.setValue(model.getPatient());
-        numeroProperty.set(model.getNumero());
 
-        patientProperty.addListener((obs,oldv,newV) -> model.setPatient(newV));
+        numeroProperty.set(model.getNumero());
         numeroProperty.addListener((obs,oldv,newV) -> model.setNumero((Integer) newV));
+
+        //listObs.setAll((PatientVM) model.getListPatient());
+        //listObs.setAll(model.getListPatient());
 
     }
 
@@ -42,8 +42,14 @@ public class ChambreVM implements PropertyChangeListener {
             numeroProperty.set((Integer) evt.getNewValue());
         }
 
-        if (evt.getPropertyName().equals(Chambre.PROP_PATIENT)){
-            patientProperty.set((Patient) evt.getNewValue());
+        if (evt.getPropertyName().equals(Chambre.PROP_LIST_PATIENT)){
+            listObs.setAll((PatientVM) evt.getNewValue());
         }
+    }
+
+    public void addPatientVM(String nomPatient) {
+        PatientVM patientVM = new PatientVM();
+        patientVM.setNomProperty(nomPatient);
+        listObs.add(patientVM);
     }
 }

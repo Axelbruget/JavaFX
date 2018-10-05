@@ -18,10 +18,6 @@ public class CollectionChambre {
         this.listChambre = newlistChambre;
     }
 
-    public CollectionChambre(List<Chambre> listChambre) {
-        this.listChambre = listChambre;
-    }
-
     public void addPropertyChangeListener(PropertyChangeListener listener){
         propertyChangeCollectionChambre.addPropertyChangeListener(listener);
     }

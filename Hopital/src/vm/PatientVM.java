@@ -19,7 +19,7 @@ public class PatientVM implements PropertyChangeListener {
 
 
     public PatientVM() {
-        model = new Patient("test");
+        model = new Patient();
         model.addPropertyChangeListener(this);
         propertyNom.set(model.getNom());
         propertyNom.addListener((obs,oldv,newV) -> model.setNom(newV));
