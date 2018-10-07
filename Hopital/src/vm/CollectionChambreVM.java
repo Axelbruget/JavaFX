@@ -8,10 +8,9 @@ import javafx.collections.ObservableList;
 import model.Chambre;
 import model.CollectionChambre;
 
+import java.beans.IndexedPropertyChangeEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CollectionChambreVM implements PropertyChangeListener {
 
@@ -27,20 +26,33 @@ public class CollectionChambreVM implements PropertyChangeListener {
         model = new CollectionChambre();
         model.addPropertyChangeListener(this);
 
-        List<Chambre> list = model.getListChambre();
-        //listObs.setAll((List<ChambreVM>) list);
-        //list.addListener((obs,oldV,newV) -> model.setListChambre(newV));
-
     }
+
+    public CollectionChambre getModel() { return model; }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        IndexedPropertyChangeEvent e = (IndexedPropertyChangeEvent) evt;
+
         if (evt.getPropertyName().equals(CollectionChambre.PROP_LIST)){
-            //listObs.add((ChambreVM) evt.getNewValue());
+            Chambre chambre = (Chambre) evt.getNewValue();
+            if (listObs.size() <= e.getIndex()){
+                listObs.add(new ChambreVM((Chambre) evt.getNewValue()));
+            }else{
+                if(!listObs.get(e.getIndex()).getModel().equals(chambre)){
+                    listObs.add(e.getIndex(),new ChambreVM((Chambre) evt.getNewValue()));
+                }
+            }
         }
     }
 
-    public void addChambreVM(ChambreVM chambre){
-            listObs.add(chambre);
+    public void ajouterChambreVM(ChambreVM chambreVM){
+            listObs.add(chambreVM);
+            model.ajouterChambre(chambreVM.getModel());
+    }
+
+    public void supprimerChambreVM(ChambreVM chambreVM){
+            listObs.remove(chambreVM);
+            model.supprimerChambre(chambreVM.getModel());
     }
 }

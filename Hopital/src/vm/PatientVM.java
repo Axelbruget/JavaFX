@@ -18,17 +18,21 @@ public class PatientVM implements PropertyChangeListener {
         public StringProperty nomPropertyProperty() { return propertyNom; }
 
 
+    public Patient getModel() {
+        return model;
+    }
+
     public PatientVM() {
         model = new Patient();
         model.addPropertyChangeListener(this);
-        propertyNom.set(model.getNom());
+        setNomProperty(model.getNom());
         propertyNom.addListener((obs,oldv,newV) -> model.setNom(newV));
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals(Patient.PROP_NOM)){
-            propertyNom.set((String) evt.getNewValue());
+            setNomProperty((String) evt.getNewValue());
         }
     }
 }

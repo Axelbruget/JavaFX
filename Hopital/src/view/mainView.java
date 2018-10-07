@@ -1,5 +1,6 @@
 package view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import vm.ChambreVM;
@@ -9,12 +10,14 @@ import vm.PatientVM;
 public class mainView {
 
     @FXML public Button clicAjouterChambre;
+    @FXML public Button clicSupprimerChambre;
     @FXML private ListView<ChambreVM> listeChambres;
     @FXML private ListView<PatientVM> listePatients;
     @FXML private TextField textFieldNomPatient;
-    @FXML private Button clicValider;
+    @FXML public TextField textFieldPrenomPatient;
 
     private CollectionChambreVM collectionChambreVM = new CollectionChambreVM();
+
 
     public void initialize(){
 
@@ -80,6 +83,12 @@ public class mainView {
     public void clicAjouterChambre() {
         ChambreVM chambreVm = new ChambreVM();
         chambreVm.setNumero(collectionChambreVM.getList().size() + 1);
-        collectionChambreVM.addChambreVM(chambreVm);
+        collectionChambreVM.ajouterChambreVM(chambreVm);
+    }
+
+    public void clicSupprimerPatient() {
+    }
+
+    public void clicSupprimerChambre(ActionEvent actionEvent) {
     }
 }

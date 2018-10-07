@@ -1,50 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.SplitPane?>
+<?import java.lang.Integer?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.mainView">
-   <left>
-      <BorderPane BorderPane.alignment="CENTER">
-         <top>
-            <HBox BorderPane.alignment="CENTER">
-               <children>
-                  <TextField fx:id="textFieldNomPatient" promptText="Nom du patient" />
-                  <Button fx:id="clicValider" mnemonicParsing="false" onAction="#clicAjouterPatient" text="Valider" disable="${textFieldNomPatient.text.empty}"/>
-               </children>
-            </HBox>
-         </top>
-          <bottom>
-              <Button fx:id="clicAjouterChambre" mnemonicParsing="false" onAction="#clicAjouterChambre" text="Ajouter une chambre"/>
-          </bottom>
-      </BorderPane>
-   </left>
-   <right>
-      <BorderPane BorderPane.alignment="CENTER">
-         <bottom>
-            <BorderPane BorderPane.alignment="CENTER">
-                <top>
-                    <Label text="La liste des chambres" />
-                </top>
-                <center>
-                    <ListView fx:id="listeChambres" BorderPane.alignment="CENTER" />
-                </center>
-            </BorderPane>
-         </bottom>
-         <top>
-            <BorderPane BorderPane.alignment="CENTER">
-                <top>
-                    <Label text="Les patients de cette chambre" />
-                </top>
-                <center>
-                    <ListView fx:id="listePatients" BorderPane.alignment="CENTER" />
-                </center>
-            </BorderPane>
-         </top>
-      </BorderPane>
-   </right>
-</BorderPane>
+<?import javafx.scene.control.Label?>
+<SplitPane dividerPositions="0.3" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.mainView">
+    <fx:define>
+        <Integer fx:id="moins1" fx:value="-1" />
+    </fx:define>
+    <items>
+        <VBox>
+            <children>
+                <AnchorPane>
+                    <children>
+                        <ListView fx:id="listeChambres" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0"/>
+                    </children>
+                </AnchorPane>
+                <HBox spacing="10.0">
+                    <children>
+                        <Button mnemonicParsing="false" fx:id="clicAjouterChambre" onAction="#clicAjouterChambre" text="Ajouter" />
+                        <Button disable="${listeChambres.selectionModel.selectedIndex == moins1}" mnemonicParsing="false" fx:id="clicSupprimerChambre" onAction="#clicSupprimerChambre" text="Supprimer" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <VBox disable="${listeChambres.selectionModel.selectedIndex == moins1}" spacing="5.0">
+            <children>
+                <TextField fx:id="textFieldNomPatient" promptText="Nom du patient" />
+                <TextField fx:id="textFieldPrenomPatient" promptText="Prenom du patient" />
+                <AnchorPane>
+                    <children>
+                        <ListView fx:id="listePatients" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                    </children>
+                </AnchorPane>
+                <HBox spacing="5.0">
+                    <children>
+                        <Button mnemonicParsing="false" disable="${textFieldNomPatient.text.empty || textFieldPrenomPatient.text.empty}" onAction="#clicAjouterPatient" text="Ajouter" />
+                        <Button mnemonicParsing="false" onAction="#clicSupprimerPatient" text="Supprimer" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </items>
+</SplitPane>

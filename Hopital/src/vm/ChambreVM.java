@@ -24,16 +24,21 @@ public class ChambreVM implements PropertyChangeListener {
         public ReadOnlyListProperty<PatientVM> listProperty() { return list; }
 
 
+    public Chambre getModel() { return model; }
+
     public ChambreVM() {
         model = new Chambre();
         model.addPropertyChangeListener(this);
 
         numeroProperty.set(model.getNumero());
         numeroProperty.addListener((obs,oldv,newV) -> model.setNumero((Integer) newV));
+    }
 
-        //listObs.setAll((PatientVM) model.getListPatient());
-        //listObs.setAll(model.getListPatient());
-
+    public ChambreVM(Chambre chambre){
+            this.model = chambre;
+            model.addPropertyChangeListener(this);
+            setNumero(model.getNumero());
+            numeroProperty.addListener((observable, oldValue, newValue) -> model.setNumero(getNumero()));
     }
 
     @Override

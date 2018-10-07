@@ -2,6 +2,7 @@ package model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Chambre {
@@ -9,7 +10,7 @@ public class Chambre {
     private int numero;
     public static final String PROP_NUMERO = "numero";
 
-    private List<Patient> listPatient;
+    private List<Patient> listPatient = new ArrayList<>();
     public static final String PROP_LIST_PATIENT = "listPatient";
 
     private final transient PropertyChangeSupport propertyChangeChambre = new PropertyChangeSupport(this);
@@ -20,12 +21,15 @@ public class Chambre {
         this.numero = newNumero;
     }
 
-    public void setListPatient(List<Patient> newListPatient) {
-        List<Patient> oldListPatient = this.listPatient;
-        propertyChangeChambre.firePropertyChange(PROP_LIST_PATIENT,oldListPatient,newListPatient);
-        this.listPatient = newListPatient;
-
+    public void ajouterPatient(Patient patient){
+        listPatient.add(patient);
+        int indexAjout = listPatient.indexOf(patient);
+        propertyChangeChambre.fireIndexedPropertyChange(PROP_LIST_PATIENT,indexAjout,null,patient);
     }
+    public void supprimerPatient(Patient patient){
+        listPatient.remove(patient);
+    }
+
     public int getNumero() { return numero; }
     public List<Patient> getListPatient() { return listPatient; }
 
