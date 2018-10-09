@@ -3,15 +3,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.SplitPane?>
 <?import java.lang.Integer?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.geometry.Insets?>
 
-<?import javafx.scene.control.Label?>
+
+
 <SplitPane dividerPositions="0.3" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.mainView">
     <fx:define>
         <Integer fx:id="moins1" fx:value="-1" />

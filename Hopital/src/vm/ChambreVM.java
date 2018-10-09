@@ -52,9 +52,14 @@ public class ChambreVM implements PropertyChangeListener {
         }
     }
 
-    public void addPatientVM(String nomPatient) {
+    public void addPatientVM(String nomPatient,String prenomPatient) {
         PatientVM patientVM = new PatientVM();
         patientVM.setNomProperty(nomPatient);
+        patientVM.setPrenomProperty(prenomPatient);
         listObs.add(patientVM);
+    }
+
+    public void supprimerPatientVM(PatientVM patientVM){
+            listObs.remove(patientVM);
     }
 }

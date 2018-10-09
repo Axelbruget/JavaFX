@@ -56,7 +56,7 @@ public class mainView {
             protected void updateItem(PatientVM item, boolean empty) {
                 super.updateItem(item, empty);
                 if (!empty){
-                    textProperty().bind(item.nomPropertyProperty());
+                    textProperty().bind(item.propertyNomProperty().concat(" - ").concat(item.propertyPrenomProperty()));
                 }
                 else{
                     textProperty().unbind();
@@ -67,17 +67,7 @@ public class mainView {
     }
 
     public void clicAjouterPatient(){
-        if (listeChambres.getSelectionModel().getSelectedIndex() == -1){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Vous devez selectionner une chambre");
-            alert.showAndWait();
-        }
-        else{
-            listeChambres.getSelectionModel().getSelectedItem().addPatientVM(textFieldNomPatient.getText());
-            textFieldNomPatient.setText("");
-        }
-
+        listeChambres.getSelectionModel().getSelectedItem().addPatientVM(textFieldNomPatient.getText(),textFieldPrenomPatient.getText());
     }
 
     public void clicAjouterChambre() {
@@ -87,6 +77,7 @@ public class mainView {
     }
 
     public void clicSupprimerPatient() {
+        listeChambres.getSelectionModel().getSelectedItem().supprimerPatientVM(listePatients.getSelectionModel().getSelectedItem());
     }
 
     public void clicSupprimerChambre(ActionEvent actionEvent) {

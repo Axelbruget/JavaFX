@@ -15,8 +15,12 @@ public class PatientVM implements PropertyChangeListener {
     private StringProperty propertyNom = new SimpleStringProperty();
         public void setNomProperty(String nomProperty) { this.propertyNom.set(nomProperty); }
         public String getNomProperty() { return propertyNom.get(); }
-        public StringProperty nomPropertyProperty() { return propertyNom; }
+        public StringProperty propertyNomProperty() { return propertyNom; }
 
+    private StringProperty propertyPrenom = new SimpleStringProperty();
+        public void setPrenomProperty(String propertyPrenom) { this.propertyPrenom.set(propertyPrenom); }
+        public String getPrenomProperty() { return propertyPrenom.get(); }
+        public StringProperty propertyPrenomProperty() { return propertyPrenom; }
 
     public Patient getModel() {
         return model;
@@ -26,7 +30,9 @@ public class PatientVM implements PropertyChangeListener {
         model = new Patient();
         model.addPropertyChangeListener(this);
         setNomProperty(model.getNom());
+        setPrenomProperty(model.getPrenom());
         propertyNom.addListener((obs,oldv,newV) -> model.setNom(newV));
+        propertyPrenom.addListener((ons,oldV,newV) -> model.setPrenom(newV));
     }
 
     @Override
