@@ -23,6 +23,10 @@ public class MatiereVM implements PropertyChangeListener {
         public void setNomProperty(String nomProperty) { this.nomProperty.set(nomProperty); }
         public StringProperty nomPropertyProperty() { return nomProperty; }
 
+    private DoubleProperty moyenneProperty = new SimpleDoubleProperty();
+        public double getMoyenneProperty() { return moyenneProperty.get(); }
+        public DoubleProperty moyennePropertyProperty() { return moyenneProperty; }
+        public void setMoyenneProperty(double moyenneProperty) { this.moyenneProperty.set(moyenneProperty); }
 
     public Matiere getModel() { return model; }
 
@@ -31,6 +35,8 @@ public class MatiereVM implements PropertyChangeListener {
         model.addPropertyChangeListener(this);
         nomProperty.set(model.getNom());
         nomProperty.addListener((obs,oldV,newV) -> model.setNom(newV));
+        moyenneProperty.setValue(model.getMoyenne());
+        moyenneProperty.addListener((obs,oldV,newV) -> model.setMoyenne((Double) newV));
     }
 
     public MatiereVM(Matiere matiere){
@@ -38,16 +44,21 @@ public class MatiereVM implements PropertyChangeListener {
          model.addPropertyChangeListener(this);
          setNomProperty(model.getNom());
          nomProperty.addListener((obs,oldV,newV) -> model.setNom(newV));
+         setMoyenneProperty(model.getMoyenne());
+         moyenneProperty.addListener((obs,oldV,newV) -> model.setMoyenne((Double) newV));
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        IndexedPropertyChangeEvent e = (IndexedPropertyChangeEvent) evt;
 
+        if (evt.getPropertyName().equals(Matiere.PROP_MOYENNE)){
+            moyenneProperty.set((Double) evt.getNewValue());
+        }
         if (evt.getPropertyName().equals(Matiere.PROP_NOM)){
             nomProperty.set((String) evt.getNewValue());
         }
         if (evt.getPropertyName().equals(Matiere.PROP_LIST)){
+            IndexedPropertyChangeEvent e = (IndexedPropertyChangeEvent) evt;
             Note note = (Note) evt.getNewValue();
             if (listObs.size() <= e.getIndex()){
                 listObs.add(new NoteVM((Integer) evt.getNewValue()));

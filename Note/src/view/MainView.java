@@ -1,14 +1,17 @@
 package view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import vm.MatiereVM;
 import vm.NoteVM;
 import vm.UECollectionVM;
+
+import java.io.IOException;
 
 public class MainView {
 
@@ -16,21 +19,19 @@ public class MainView {
 
     @FXML private Spinner spinnerChoixNote;
     @FXML private ListView<NoteVM> listeNoteVM;
-    @FXML private TextField textFieldNomMatiere;
     @FXML private ListView<MatiereVM> listeMatiereVM;
 
     public void initialize(){
         listeMatiereVM.itemsProperty().bind(collectionVM.listProperty());
 
-
-        setCellFactoryItem();
+        setCellFactoryMatiere();
         setCellFactoryNote();
 
         listeMatiereVM.getSelectionModel().selectedItemProperty().addListener((obs,oldV,newV) -> {
             if (oldV != null){
-                //listeNoteVM.itemsProperty().unbind(oldV.listProperty());
+                listeNoteVM.itemsProperty().unbind();
             }
-            if (newV != null ){
+            if (newV != null){
                 listeNoteVM.itemsProperty().bind(newV.listProperty());
             }
         });
@@ -55,13 +56,13 @@ public class MainView {
     }
 
 
-    private void setCellFactoryItem(){
+    private void setCellFactoryMatiere(){
         listeMatiereVM.setCellFactory(__ -> new ListCell<MatiereVM>(){
             @Override
             protected void updateItem(MatiereVM item, boolean empty) {
                 super.updateItem(item, empty);
                 if (!empty){
-                    textProperty().bind(item.nomPropertyProperty());
+                    textProperty().bind(item.nomPropertyProperty().concat(" - ").concat(item.moyennePropertyProperty()));
                 }
                 else{
                     textProperty().unbind();
@@ -71,12 +72,35 @@ public class MainView {
         });
     }
 
-    public void clicAjouterMatiere() {
-        collectionVM.addMatiereVM(textFieldNomMatiere.getText());
+    @FXML
+    private void clicAjouterMatiere(){
+        Stage stageFenetreCreation = new Stage();
+        stageFenetreCreation.initOwner(spinnerChoixNote.getScene().getWindow());
+        stageFenetreCreation.initModality(Modality.WINDOW_MODAL);
+        CreationView controller = initFenetreCreation(stageFenetreCreation);
+        if (controller.getNomMatiere() != null){
+            collectionVM.addMatiereVM(controller.getNomMatiere());
+        }
+    }
+
+    private CreationView initFenetreCreation(Stage stageFenetreCreation) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/creationView.fxml"));
+        CreationView controller = new CreationView();
+        loader.setController(controller);
+        try{
+            stageFenetreCreation.setScene(new Scene(loader.load()));
+            stageFenetreCreation.showAndWait();
+        } catch (IOException e) {
+            Alert err = new Alert(Alert.AlertType.ERROR,"erreur à l'ouverture",ButtonType.OK);
+            err.setHeaderText(null);
+            err.show();
+        }
+        return controller;
     }
 
     public void clicSupprimerMatiere() {
         collectionVM.removeMatiereVM(listeMatiereVM.getSelectionModel().getSelectedItem());
+        listeMatiereVM.getSelectionModel().clearSelection();
     }
 
     public void clicAjouterNote() {

@@ -1,0 +1,11 @@
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml">
+    <TextField fx:id="textFieldNomMatiere"/>
+    <Button onAction="#clicValider"/>
+    <Button onAction="#clicAnnuler"/>
+</AnchorPane>
