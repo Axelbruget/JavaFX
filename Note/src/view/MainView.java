@@ -27,6 +27,9 @@ public class MainView {
         setCellFactoryNote();
 
         listeMatiereVM.getSelectionModel().selectedItemProperty().addListener((obs,oldV,newV) -> {
+            if (oldV != null){
+                //listeNoteVM.itemsProperty().unbind(oldV.listProperty());
+            }
             if (newV != null ){
                 listeNoteVM.itemsProperty().bind(newV.listProperty());
             }
@@ -79,7 +82,6 @@ public class MainView {
     public void clicAjouterNote() {
         int choix = Integer.valueOf(spinnerChoixNote.getValue().toString());
         listeMatiereVM.getSelectionModel().getSelectedItem().addNote(choix);
-        System.out.println(listeMatiereVM.getSelectionModel().getSelectedItem().getModel().getListNote().size());
     }
 
     public void clicSupprimerNote() {

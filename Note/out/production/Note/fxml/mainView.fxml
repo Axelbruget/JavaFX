@@ -12,7 +12,7 @@
 <?import java.lang.Integer?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Spinner?>
-<SplitPane dividerPositions="0.7" fx:controller="view.MainView" xmlns:fx="http://javafx.com/fxml">
+<SplitPane dividerPositions="0.8" fx:controller="view.MainView" xmlns:fx="http://javafx.com/fxml">
     <fx:define>
         <Integer fx:id="moins1" fx:value="-1" />
     </fx:define>
@@ -24,10 +24,10 @@
                         <ListView fx:id="listeMatiereVM" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                     </children>
                 </AnchorPane>
-                <HBox spacing="10.0">
+                <HBox spacing="5.0">
                     <children>
                         <TextField fx:id="textFieldNomMatiere" promptText="Nom de matière"/>
-                        <Button mnemonicParsing="false" onAction="#clicAjouterMatiere" text="Ajouter" disable="${TextFieldNomMatiere.text.empty}"/>
+                        <Button mnemonicParsing="false" onAction="#clicAjouterMatiere" text="Ajouter" disable="${textFieldNomMatiere.text.empty}"/>
                         <Button disable="${listeMatiereVM.selectionModel.selectedIndex == moins1}" mnemonicParsing="false" onAction="#clicSupprimerMatiere" text="Supprimer" />
                     </children>
                 </HBox>
@@ -39,13 +39,13 @@
                     <ListView fx:id="listeNoteVM" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                 </children>
             </AnchorPane>
-            <HBox spacing="10.0">
+            <VBox spacing="5.0">
                 <children>
-                    <Spinner fx:id="spinnerChoixNote" min="0" max="20" initialValue="10"/>
                     <Button mnemonicParsing="false" onAction="#clicAjouterNote" text="Ajouter" />
+                    <Spinner fx:id="spinnerChoixNote" min="0" max="20" initialValue="10"/>
                     <Button mnemonicParsing="false" onAction="#clicSupprimerNote" text="Supprimer" disable="${listeNoteVM.selectionModel.selectedIndex == moins1}"/>
                 </children>
-            </HBox>
+            </VBox>
         </VBox>
     </items>
 

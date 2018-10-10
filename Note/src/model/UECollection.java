@@ -38,5 +38,15 @@ public class UECollection {
     public void addPropertyChangeListener(PropertyChangeListener listener){
         propertyChangeUECollection.addPropertyChangeListener(listener);
     }
+
+    public void supprimerMatiere(Matiere matiere) {
+        listMatiere.remove(matiere);
+    }
+
+    public void ajouterMatiere(Matiere matiere) {
+        listMatiere.add(matiere);
+        int indexAjout = listMatiere.indexOf(matiere);
+        propertyChangeUECollection.fireIndexedPropertyChange(PROP_LIST,indexAjout,null,matiere);
+    }
 }
 

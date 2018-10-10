@@ -38,4 +38,14 @@ public class Matiere {
     public void addPropertyChangeListener(PropertyChangeListener listener){
         propertyChangeMatiere.addPropertyChangeListener(listener);
     }
+
+    public void supprimerNote(Note note) {
+        listNote.remove(note);
+    }
+
+    public void ajouterNote(Note note) {
+        listNote.add(note);
+        int indexAjout = listNote.indexOf(note);
+        propertyChangeMatiere.fireIndexedPropertyChange(PROP_LIST,indexAjout,null,note);
+    }
 }

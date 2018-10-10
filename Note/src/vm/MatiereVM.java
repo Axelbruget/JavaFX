@@ -4,7 +4,9 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Matiere;
+import model.Note;
 
+import java.beans.IndexedPropertyChangeEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -40,19 +42,31 @@ public class MatiereVM implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        IndexedPropertyChangeEvent e = (IndexedPropertyChangeEvent) evt;
+
         if (evt.getPropertyName().equals(Matiere.PROP_NOM)){
             nomProperty.set((String) evt.getNewValue());
         }
         if (evt.getPropertyName().equals(Matiere.PROP_LIST)){
-            listObs.setAll((NoteVM) evt.getNewValue());
+            Note note = (Note) evt.getNewValue();
+            if (listObs.size() <= e.getIndex()){
+                listObs.add(new NoteVM((Integer) evt.getNewValue()));
+            }else{
+                if(! listObs.get(e.getIndex()).getModel().equals(note)){
+                    listObs.add(e.getIndex(),new NoteVM((Integer) evt.getNewValue()));
+                }
+            }
         }
     }
 
     public void addNote(int note) {
-            listObs.add(new NoteVM(note));
+            NoteVM noteAAjouter = new NoteVM(note);
+            listObs.add(noteAAjouter);
+            model.ajouterNote(noteAAjouter.getModel());
     }
 
     public void removeNote(NoteVM selectedNote) {
             listObs.remove(selectedNote);
+            model.supprimerNote(selectedNote.getModel());
     }
 }
