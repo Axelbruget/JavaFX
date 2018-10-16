@@ -5,7 +5,9 @@
 
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml">
-    <TextField fx:id="textFieldNomMatiere"/>
-    <Button onAction="#clicValider"/>
-    <Button onAction="#clicAnnuler"/>
+    <HBox>
+        <TextField fx:id="textFieldNomMatiere"/>
+        <Button onAction="#clicValider" text="Ajouter"/>
+        <Button onAction="#clicAnnuler" text="Annuler"/>
+    </HBox>
 </AnchorPane>

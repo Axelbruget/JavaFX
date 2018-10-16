@@ -1,22 +1,26 @@
 package view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
-import java.awt.*;
 
 public class CreationView {
 
     @FXML private TextField textFieldNomMatiere;
 
+    private String nomMatiere = null;
+
     public void clicValider(){
-        textFieldNomMatiere.setText("");
+        nomMatiere = textFieldNomMatiere.getText();
+        textFieldNomMatiere.getScene().getWindow().hide();
     }
 
     public void clicAnnuler(){
-        textFieldNomMatiere.setText("");
+        nomMatiere = null;
+        textFieldNomMatiere.getScene().getWindow().hide();
     }
 
     public String getNomMatiere() {
-        return textFieldNomMatiere.getText();
+        return nomMatiere;
     }
 }

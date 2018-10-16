@@ -9,6 +9,7 @@
 <?import java.lang.Integer?>
 <?import javafx.scene.control.Spinner?>
 
+<?import javafx.scene.control.Label?>
 <SplitPane dividerPositions="0.8" fx:controller="view.MainView" xmlns:fx="http://javafx.com/fxml">
     <fx:define>
         <Integer fx:id="moins1" fx:value="-1"/>
@@ -18,6 +19,7 @@
         <HBox spacing="20.0">
             <Button mnemonicParsing="false" onAction="#clicAjouterMatiere" text="Ajouter"/>
             <Button disable="${listeMatiereVM.selectionModel.selectedIndex == moins1}" mnemonicParsing="false" onAction="#clicSupprimerMatiere" text="Supprimer"/>
+            <Label fx:id="labelNombreMatiere" text="Nombre de matières : "/>
         </HBox>
         <AnchorPane>
             <ListView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

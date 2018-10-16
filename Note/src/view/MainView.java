@@ -1,22 +1,23 @@
 package view;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import bind.MoyenneBinding;
 import vm.MatiereVM;
 import vm.NoteVM;
 import vm.UECollectionVM;
-
 import java.io.IOException;
 
 public class MainView {
 
     private UECollectionVM collectionVM = new UECollectionVM("testing");
 
+    @FXML private Label labelNombreMatiere;
     @FXML private Spinner spinnerChoixNote;
     @FXML private ListView<NoteVM> listeNoteVM;
     @FXML private ListView<MatiereVM> listeMatiereVM;
@@ -35,6 +36,9 @@ public class MainView {
                 listeNoteVM.itemsProperty().bind(newV.listProperty());
             }
         });
+
+
+        labelNombreMatiere.textProperty().bind(Bindings.concat("Moyenne :").concat(new MoyenneBinding(collectionVM.getList()).asString()));
     }
 
 
@@ -98,17 +102,20 @@ public class MainView {
         return controller;
     }
 
-    public void clicSupprimerMatiere() {
+    @FXML
+    private void clicSupprimerMatiere() {
         collectionVM.removeMatiereVM(listeMatiereVM.getSelectionModel().getSelectedItem());
         listeMatiereVM.getSelectionModel().clearSelection();
     }
 
-    public void clicAjouterNote() {
+    @FXML
+    private void clicAjouterNote() {
         int choix = Integer.valueOf(spinnerChoixNote.getValue().toString());
         listeMatiereVM.getSelectionModel().getSelectedItem().addNote(choix);
     }
 
-    public void clicSupprimerNote() {
+    @FXML
+    private void clicSupprimerNote() {
         listeMatiereVM.getSelectionModel().getSelectedItem().removeNote(listeNoteVM.getSelectionModel().getSelectedItem());
     }
 }
